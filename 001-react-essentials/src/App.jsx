@@ -14,6 +14,7 @@ import { useState } from 'react';
 // <Component /> compiles to React.createElement(Component)
 // <obj.component /> compiles to React.createElement(obj.component)
 function App() {
+
   /**
    * 2 rules for hook.
    * 1. Hooks must be called at the top level of function. (Not inside if else, loops, nested blocks etc)

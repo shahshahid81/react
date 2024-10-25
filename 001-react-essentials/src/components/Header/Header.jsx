@@ -24,6 +24,7 @@ export default function Header() {
         Also, this will help with image optimization, caching etc and other improvements.
         It also helps with hot reloading since only edited files are imported again after changes.
       */}
+      {/* The commented code is incorrect. */}
       {/* <img src="src/assets/react-core-concepts.png" alt="Stylized atom" /> */}
       <img src={reactImg} alt="Stylized atom" />
 
