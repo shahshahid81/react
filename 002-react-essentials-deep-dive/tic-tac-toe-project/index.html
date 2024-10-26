@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/game-logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React Tic-Tac-Toe</title>
+</head>
+
+<body>
+  <!-- We have added the markup just to show that we don't need to always create components and can add markup in the index.html file -->
+  <header>
+    <!-- Note that the image in the public folder is directly available here. However, in case of components we need to use the asset folder and have to import the files in the react code so that they are processed properly and added to the final build. -->
+    <img src="game-logo.png" alt="Tic Tac Toe hand drawn board" />
+    <h1>Tic-Tac-Toe</h1>
+  </header>
+  <div id="root"></div>
+  <script type="module" src="/src/index.jsx"></script>
+</body>
+
+</html>
