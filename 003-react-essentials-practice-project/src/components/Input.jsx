@@ -1,8 +1,13 @@
 export default function Input({ labelText, inputValue, handleInputChange }) {
   return (
-    <div>
+    <p>
       <label>{labelText}</label>
-      <input type="number" value={inputValue} onChange={handleInputChange} />
-    </div>
+      <input
+        type="number"
+        required
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+    </p>
   );
 }

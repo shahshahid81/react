@@ -11,7 +11,7 @@ export default function UserInvestmentData({
   setDuration,
 }) {
   return (
-    <div id="user-input">
+    <section id="user-input">
       <div className="input-group">
         <Input
           labelText="Initial Investment"
@@ -42,6 +42,6 @@ export default function UserInvestmentData({
           handleInputChange={(e) => setDuration(Number(e.target.value), 10)}
         />
       </div>
-    </div>
+    </section>
   );
 }
