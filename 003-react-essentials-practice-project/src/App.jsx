@@ -18,13 +18,6 @@ function App() {
       expectedReturn,
       duration,
     });
-    console.log({
-      initialInvestment,
-      annualInvestment,
-      expectedReturn,
-      duration,
-      investmentData,
-    });
   }
 
   return (
