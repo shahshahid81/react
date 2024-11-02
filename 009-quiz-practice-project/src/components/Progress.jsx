@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const INTERVAL = 10;
 
-export default function Progress({ onComplete, timer, className }) {
+export default function Progress({ onComplete, timer, ...props }) {
   const [value, setValue] = useState(timer);
 
   useEffect(() => {
@@ -21,5 +21,5 @@ export default function Progress({ onComplete, timer, className }) {
     };
   }, [value]);
 
-  return <progress className={className} value={value} max={timer} />;
+  return <progress {...props} value={value} max={timer} />;
 }

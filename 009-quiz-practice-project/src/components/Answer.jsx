@@ -1,7 +1,7 @@
 export default function Answer({ answer, id, submitAnswer, selectedAnswer }) {
   function handleSubmitAnswer() {
     if (selectedAnswer === null) {
-      submitAnswer({ id, answer });
+      submitAnswer(answer);
     }
   }
 

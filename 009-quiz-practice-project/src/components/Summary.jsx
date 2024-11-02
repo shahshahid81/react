@@ -53,7 +53,8 @@ export default function Summary({ result }) {
       <ol>
         {Object.values(result).map((data, index) => (
           <li key={index}>
-            <p className="question">{QUIZ_QUESTIONS[index].text}</p>
+            <h3>{index + 1}</h3>
+            <p className="question">{QUIZ_QUESTIONS[index].question}</p>
             <p
               className={`user-answer ${
                 data.answer === null

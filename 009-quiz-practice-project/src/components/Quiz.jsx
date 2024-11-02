@@ -22,14 +22,10 @@ export default function Quiz() {
   function handleSaveAnswer(questionId, payload) {
     setResult((prevResult) => {
       const newResult = { ...prevResult };
-
-      if (!newResult[questionId]) {
-        newResult[questionId] = {
-          answer: payload?.answer ?? null,
-          isCorrect: (payload?.id ?? -1) == 0,
-        };
-      }
-
+      newResult[questionId] = {
+        answer: payload?.answer ?? null,
+        isCorrect: payload?.id === 0,
+      };
       return newResult;
     });
   }

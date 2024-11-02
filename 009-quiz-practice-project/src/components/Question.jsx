@@ -1,16 +1,18 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import Answer from './Answer.jsx';
 import Progress from './Progress.jsx';
 
-export default function Question({ text, answers, saveAnswer, nextQuestion }) {
+export default function Question({
+  question,
+  answers,
+  saveAnswer,
+  nextQuestion,
+}) {
   const [status, setStatus] = useState('');
 
-  function handleProgressComplete() {
+  function handleSkippedAnswer() {
     saveAnswer(null);
-    if (status === '') {
-      setStatus('SKIPPED');
-    }
-    nextQuestion();
+    setStatus('SKIPPED');
   }
 
   function handleSubmitAnswer(answer) {
@@ -23,12 +25,15 @@ export default function Question({ text, answers, saveAnswer, nextQuestion }) {
 
   return (
     <section id="question">
-      <Progress
-        timer={status === 'ANSWERED' ? 1000 : 3000}
-        className={`${status === 'ANSWERED' ? 'answered' : ''}`}
-        onComplete={handleProgressComplete}
-      />
-      <h2>{text}</h2>
+      {status !== '' ? (
+        <Progress timer={1000} className="answered" onComplete={nextQuestion} />
+      ) : null}
+
+      {status === '' ? (
+        <Progress timer={3000} onComplete={handleSkippedAnswer} />
+      ) : null}
+
+      <h2>{question}</h2>
       <ul id="answers">
         {answers.map(({ id, answer }) => (
           <li className="answer" key={answer}>
@@ -36,7 +41,9 @@ export default function Question({ text, answers, saveAnswer, nextQuestion }) {
               id={id}
               answer={answer}
               selectedAnswer={selectedAnswer}
-              submitAnswer={handleSubmitAnswer}
+              submitAnswer={(userAnswer) =>
+                handleSubmitAnswer({ id, answer: userAnswer })
+              }
             />
           </li>
         ))}
