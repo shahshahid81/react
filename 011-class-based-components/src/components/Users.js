@@ -15,6 +15,12 @@ class Users extends Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.props.users.length === 0) {
+      // Error thrown here will be handled by Error Boundary Component but it needs to wrap the component
+      throw new Error('No Users Provided!')
+    }
+  }
 
   toggleUsersHandler() {
     // setState will merge the state instead of overwriting the state. So only showUser will be replaced with new value and extraProperty or any other properties won't be affected
