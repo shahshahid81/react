@@ -3,6 +3,14 @@ import Input from './Input.jsx';
 import CtaButton from './CtaButton.jsx';
 import { useContext, useState } from 'react';
 import { CartContext } from '../store/shopping-cart-context.jsx';
+import useHttp from '../hooks/useHttp.js';
+
+const requestConfig = {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+};
 
 export default function CheckoutModal({ open, onClose, onSuccess }) {
   const { items, resetCart } = useContext(CartContext);
@@ -11,41 +19,28 @@ export default function CheckoutModal({ open, onClose, onSuccess }) {
     return (acc += item.price * item.quantity);
   }, 0);
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const {
+    error: errorMessage,
+    isLoading,
+    executeRequest,
+  } = useHttp(null, 'http://localhost:4600/orders', requestConfig);
 
   async function submitOrder(customer) {
-    const abortController = new AbortController();
-    setErrorMessage('');
     try {
-      const response = await fetch('http://localhost:4600/orders', {
-        signal: abortController.signal,
-        method: 'POST',
-        body: JSON.stringify({
+      const result = await executeRequest(
+        JSON.stringify({
           order: {
             customer,
             items,
           },
-        }),
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        setErrorMessage(data.message);
-      } else {
+        })
+      );
+      if (result) {
         resetCart();
         onClose();
         onSuccess();
       }
-    } catch (error) {
-      if (error.name !== 'AbortError') {
-        setErrorMessage(error.message || 'An Error Occured');
-        console.log(error);
-      } else {
-        setErrorMessage('');
-      }
-    }
+    } catch (error) {}
   }
 
   async function handleSubmitOrder(event) {
@@ -91,13 +86,18 @@ export default function CheckoutModal({ open, onClose, onSuccess }) {
 
           <div className="flex gap-4 justify-end">
             <button
+              disabled={isLoading}
               type="button"
               onClick={onClose}
               className="text-stone-900 font-light"
             >
               Close
             </button>
-            <CtaButton ctaText="Submit Order" type="submit" />
+            <CtaButton
+              disabled={isLoading}
+              ctaText="Submit Order"
+              type="submit"
+            />
           </div>
         </form>
       </div>
