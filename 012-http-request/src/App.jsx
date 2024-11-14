@@ -100,7 +100,7 @@ function App() {
   return (
     <>
       <Modal open={errorUpdatingPlaces} onClose={handleError}>
-        {/* Added the condition because we are accessing message key of errorUpdatingPlaces which will be null initally and the component will crash */}
+        {/* Added the condition because we are accessing message key of errorUpdatingPlaces which will be null initially and the component will crash */}
         {errorUpdatingPlaces && (
           <Error
             title="An error occured!"

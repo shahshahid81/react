@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
 async function sendRequest(initialValue, url, config) {
-  console.log(url, config, initialValue)
   try {
     const response = await fetch(url, config);
     const resData = await response.json();
@@ -15,6 +14,7 @@ async function sendRequest(initialValue, url, config) {
     if (error.name !== 'AbortError') {
       throw error;
     }
+    // Ideally, we shouldn't return initialValue here and should handle error cases better
     return initialValue;
   }
 }
@@ -24,6 +24,7 @@ export default function useHttp(initialValue, url, config = {}) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  // Using useCallback here to avoid recreating the method again and getting stuck in infinite loop
   const executeRequest = useCallback(
     async function (bodyData, abortController) {
       setIsLoading(true);

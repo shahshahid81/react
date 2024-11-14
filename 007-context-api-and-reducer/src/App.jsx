@@ -7,7 +7,7 @@ import { DUMMY_PRODUCTS } from './dummy-products.js';
 function App() {
   return (
     // The return value of context is an object and we are using Provider key from the object which is valid JSX
-    // We need to provide inital value as well. This is the value that is passed to children. If a Provider is not used then it that case the value passed to createContext is used as default.
+    // We need to provide initial value as well. This is the value that is passed to children. If a Provider is not used then it that case the value passed to createContext is used as default.
     // <CartContext.Provider value={{ items: [] }}>
     <CartContextProvider>
       {/* <Header

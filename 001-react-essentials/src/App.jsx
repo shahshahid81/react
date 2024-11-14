@@ -14,17 +14,16 @@ import { useState } from 'react';
 // <Component /> compiles to React.createElement(Component)
 // <obj.component /> compiles to React.createElement(obj.component)
 function App() {
-
   /**
    * 2 rules for hook.
    * 1. Hooks must be called at the top level of function. (Not inside if else, loops, nested blocks etc)
    * 2. Hooks must be called in react components or custom hooks ony.
    *
-   * The first rule is because react will always follow the same order to assign data from previous render or updated value so it's important that all hooks are called in the correct order. For Example, if we use 2 useState, then first render will take the value passed as initial value. On subsequent render, since react knows 2 useState hooks were called, it will assign data from previous render or updated value in proper order instead of setting the inital value.
+   * The first rule is because react will always follow the same order to assign data from previous render or updated value so it's important that all hooks are called in the correct order. For Example, if we use 2 useState, then first render will take the value passed as initial value. On subsequent render, since react knows 2 useState hooks were called, it will assign data from previous render or updated value in proper order instead of setting the initial value.
    */
 
   /* 
-    selectedTopic is a value from useState. First time, we will get the inital value passed to the useState method. In subsequent renders, react will pass data from previous renders or updated value.
+    selectedTopic is a value from useState. First time, we will get the initial value passed to the useState method. In subsequent renders, react will pass data from previous renders or updated value.
     setSelectedTopic will schedule the value to be updated and then re render the function. 
     Because of this, we need to ensure that if we are calling useState multiple times, we should use the arrow function to get previous state and then update it.
   */
