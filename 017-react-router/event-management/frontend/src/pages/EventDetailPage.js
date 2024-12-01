@@ -16,6 +16,7 @@ export default function EventDetail() {
     <>
       <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
         <Await resolve={event}>
+          {/* Note that we are passing function instead of markup. This will also work but we would need to return JSX from the method. Internally, children is called as a function */}
           {(loadedEvent) => <EventItem event={loadedEvent}></EventItem>}
         </Await>
       </Suspense>
